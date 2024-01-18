@@ -8,8 +8,8 @@ import numpy as np
 # Schreiben
 
 def main():
-    isoforms = open("Nostoc-Data/sample_ab.isoforms.results", "r") #number 5 is index for tpm
-    matches = open("Nostoc-Data/matches_v218_taxon", "r")
+    isoforms = open("Nostoc-Data/sample_a.isoforms.results", "r") #number 5 is index for tpm
+    matches = open("Nostoc-Data/matches_v218_a_taxon", "r")
     tr2tax = {}
     tr2king = {}
     calculated = {}
