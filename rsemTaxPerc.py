@@ -8,8 +8,8 @@ import numpy as np
 # Schreiben
 
 def main():
-    isoforms = open("Nostoc-Data/sample_a.isoforms.results", "r") #number 5 is index for tpm
-    matches = open("Nostoc-Data/matches_v218_a_taxon", "r")
+    isoforms = open("/home/jonas/Dokumente/BA-Bioinformatics/kaiju/TaxListMaker/sample_a.isoforms.results", "r") #number 5 is index for tpm
+    matches = open("/home/jonas/Dokumente/BA-Bioinformatics/kaiju/TaxListMaker/matches_v218_a_taxon", "r")
     tr2tax = {}
     tr2king = {}
     calculated = {}
@@ -103,6 +103,26 @@ def main():
     print("Mittelwert Trichormus ± Standardabweichung :", (tpm_trichormus / trichormus) + np.std(trichormus_values), "bis", (tpm_trichormus / trichormus) - np.std(trichormus_values))
     print("Mittelwert Bakterien ± Standardabweichung :", (tpm_bacteria / bacteria) + np.std(bacteria_values), "bis", (tpm_bacteria / bacteria) - np.std(bacteria_values))
     print("Mittelwert Eukaryoten ± Standardabweichung :", (tpm_eukorayota / eukaryota) + np.std(eukaryota_values), "bis", (tpm_eukorayota / eukaryota) - np.std(eukaryota_values))
+    print("-------------------------")
+    print("max value for nostoc :", max(nostoc_azolla_values))
+    print("min value for nostoc :", min(nostoc_azolla_values))
+
+    values = [21]
+    sorted_values = sorted(nostoc_azolla_values)
+    hmpv = [0] * 20 #how many per value
+    while(max(values) < 421):
+        values.append(values[len(values) - 1] + 21)
+
+    for i in range(0, len(hmpv)):
+        for j in range(0, len(sorted_values)):
+            if(sorted_values[j] < values[i]):
+                hmpv[i] = hmpv[i] + 1
+                sorted_values[j] = 10000
+                
+
+    print(hmpv)
+
+        
 
 if __name__ == "__main__":
     main()
