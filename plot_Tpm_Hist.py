@@ -62,22 +62,23 @@ def main():
 
 
     counts = [20568.44, 9563.30, 790857.63, 41208.42]
-    print(nostoc_azolla_weighted)
-    print(min(nostoc_azolla_values))
+    print(nostoc_azolla_weighted, len(nostoc_azolla_weighted))
+    nostoc_azolla_weighted_tmp = [76, 26, 11, 6, 2, 1, 6, 0, 2, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0]
+    print(values, len(values))
 
-    # plt.figure(figsize=(10, 6))
-    # Plotting the original counts in blue
-    # plt.bar(organisms, counts, color='skyblue', label='TPM')
+    plt.figure(figsize=(10, 6))
+    #Plotting the original counts in blue
+    plt.bar(values, nostoc_azolla_weighted_tmp, color='skyblue', label='TPM')
 
-    # plt.xlabel('Organism')
-    # plt.ylabel('Transcript per Million')
-    # plt.title('TPM for Different Organisms')
-    # plt.xticks(rotation=45)
-    # plt.grid(axis='y', linestyle='--', alpha=0.7)
-    # plt.legend()  # Adding a legend to distinguish between the two sets of bars
+    plt.xlabel('TPM')
+    plt.ylabel('Reads')
+    plt.title('TPM for Different Organisms')
+    plt.xticks(rotation=45)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.legend()  # Adding a legend to distinguish between the two sets of bars
 
-    # Show the plot
-    # plt.show()
+    #Show the plot
+    plt.show()
 
 if __name__ == "__main__":
     main()
