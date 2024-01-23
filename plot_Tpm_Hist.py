@@ -73,17 +73,24 @@ def main():
     #trichormus_values.remove(max(trichormus_values))
     nostoc_azolla_weighted, nostoc_azolla_steps = RLperID(nostoc_azolla_values)
     trichormus_weighted, trichormus_steps = RLperID(testlist)
-    bacteria_weighted = RLperID(bacteria_values)
-    eukaryota_weighted = RLperID(eukaryota_values)
-
+    bacteria_weighted, bacteria_steps = RLperID(bacteria_values)
+    eukaryota_weighted, eukaryota_steps = RLperID(eukaryota_values)
+    print("----Nostoc Azolla-----")
     print(nostoc_azolla_weighted)
     print(nostoc_azolla_steps)
-    print(len(nostoc_azolla_weighted))
-    print(len(nostoc_azolla_steps))
-
+    print("----------------------")
+    print("------Trichormus------")
     print(trichormus_weighted)
     print(trichormus_steps)
-
+    print("----------------------")
+    print("--Bacteria--------------")
+    print(bacteria_weighted)
+    print(bacteria_steps)
+    print("-----------------------")
+    print("---Eukaryota-------------")
+    print(eukaryota_weighted)
+    print(eukaryota_steps)
+    print("-------------------------")
 
     plt.figure(figsize=(10, 6))
     #Plotting the original counts in blue
