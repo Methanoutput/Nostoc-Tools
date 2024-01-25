@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 def RLperID(rawvalues: list) -> (list,list):
     weighted_values: list = [0] * 20
-    if(len(rawvalues) < 1):
+    if (len(rawvalues) < 1):
         pass
     else:
         step: int = (max(rawvalues) + 1) / 20
@@ -23,8 +23,8 @@ def RLperID(rawvalues: list) -> (list,list):
 
 
 def main():
-    isoforms = open("/home/jonas/Dokumente/BA-Bioinformatics/kaiju/TaxListMaker/sample_a.isoforms.results", "r") #number 5 is index for tpm
-    matches = open("/home/jonas/Dokumente/BA-Bioinformatics/kaiju/TaxListMaker/matches_v218_a_taxon", "r")
+    isoforms = open("Nostoc-Data/sample_a.isoforms.results", "r") #number 5 is index for tpm
+    matches = open("Nostoc-Data/matches_v218_a_taxon", "r")
     tr2tax = {}
     tr2king = {}
     calculated = {}
