@@ -72,7 +72,7 @@ def main():
             testlist.append(trichormus_values[i])
     #trichormus_values.remove(max(trichormus_values))
     nostoc_azolla_weighted, nostoc_azolla_steps = RLperID(nostoc_azolla_values)
-    trichormus_weighted, trichormus_steps = RLperID(testlist)
+    trichormus_weighted, trichormus_steps = RLperID(trichormus_values)
     bacteria_weighted, bacteria_steps = RLperID(bacteria_values)
     eukaryota_weighted, eukaryota_steps = RLperID(eukaryota_values)
     print("----Nostoc Azolla-----")
@@ -92,9 +92,10 @@ def main():
     print(eukaryota_steps)
     print("-------------------------")
 
+
     plt.figure(figsize=(10, 6))
-    #Plotting the original counts in blue
-    plt.bar(trichormus_steps, trichormus_weighted, color='skyblue', label='TPM')
+    #Plotting the original counts in blu
+    plt.bar(eukaryota_steps, eukaryota_weighted, color='skyblue', label='TPM', width = 2000.0)
 
     plt.xlabel('TPM')
     plt.ylabel('Reads')
