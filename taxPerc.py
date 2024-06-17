@@ -21,6 +21,7 @@ def main():
 
     taxIDs = {} # create a dictionary for faster access than using a list, when we count
     # initialize a count variable for every species that we want to find. In my Case this 
+    trichormus_sum = 0
     na_sum = 0
     nostocales_sum = 0
     cyano_sum = 0
@@ -43,6 +44,8 @@ def main():
                 cyano_sum += 1
             if('1161' in taxIDs[i[2]]):
                 nostocales_sum += 1
+            if('1164' in taxIDs[i[2]]):
+                trichormus_sum += 1
             if('551115' in taxIDs[i[2]]):
                 na_sum += 1
             all_sum += 1
@@ -58,7 +61,8 @@ def main():
     print(" nostoc_azolla\t:" , na_sum, " |", na_percentage ,"|\n", 
           "nostocales\t:" , nostocales_sum, "|" , nostocales_percentage ,"|\n", 
           "cyanos\t\t:" , cyano_sum,"|", cyanos_percentage ,"|\n", 
-          "bacis\t\t:" , bac_sum, "|" , bacis_percentage,  " |\n", 
+          "bacis\t\t:" , bac_sum, "|" , bacis_percentage,  " |\n",
+          "trichormus\t:" , trichormus_sum, "|" , trichormus_sum / one_perc, "|\n", 
           "alle\t\t:" , all_sum, "|" , "100")
     
     print("--- %s seconds ---" % (time.time() - start_time))

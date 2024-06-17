@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # tpm Bacteria = 41208.42999999999
 
 
-def RLperID(rawvalues: list) -> (list,list):
+def RLperID(rawvalues: list) -> (list, list):
     weighted_values: list = [0] * 20
     if (len(rawvalues) < 1):
         pass
@@ -15,20 +15,19 @@ def RLperID(rawvalues: list) -> (list,list):
         steps: list = [step]
         for i in range(0, 20):
             for j in range(0, len(rawvalues)):
-                if(rawvalues[j] > step * i and rawvalues[j] < step * (i + 1)):
+                if (rawvalues[j] > step * i and rawvalues[j] < step * (i + 1)):
                     weighted_values[i] += 1
-            if(step*(i + 1) not in steps):
+            if (step*(i + 1) not in steps):
                 steps.append(step*(i + 1))
         return weighted_values, steps
 
 
 def main():
-    isoforms = open("Nostoc-Data/sample_a.isoforms.results", "r") #number 5 is index for tpm
-    matches = open("Nostoc-Data/matches_v218_a_taxon", "r")
+    isoforms = open("Nostoc-Data/sample_ab.isoforms.results", "r")
+    matches = open("Nostoc-Data/matches_v218_taxon", "r")
     tr2tax = {}
     tr2king = {}
     calculated = {}
-   
     nostoc_azolla_values = []
     nostoc_azolla_weighted = [0] * 21
 
@@ -38,41 +37,39 @@ def main():
     eukaryota_values = []
     eukaryota_weighted = [0] * 21
 
-
     bacteria_values = []
     bacteria_weighted = [0] * 21
-    
     for x in matches:
         x = x.split()
-        if(x[0] not in tr2tax):
+        if (x[0] not in tr2tax):
             tr2tax[x[0]] = x[12]
         else:
             tr2tax[x[0]] = tr2tax[x[0]] + x[12]
         calculated[x[0]] = False
-        if(x[0] not in tr2king):
+        if (x[0] not in tr2king):
             tr2king[x[0]] = x[13]
     for x in isoforms:
         x = x.split()
-        if(x[0] in calculated):
-            if('551115' in tr2tax[x[0]]):
+        if (x[0] in calculated):
+            if ('551115' in tr2tax[x[0]]):
                 bacteria_values.append(float(x[5]))
-                if(float(x[5]) > 0.9):
+                if (float(x[5]) > 0.9):
                     nostoc_azolla_values.append(float(x[5]))
-            elif('1164' in tr2tax[x[0]]):
+            elif ('1164' in tr2tax[x[0]]):
                 bacteria_values.append(float(x[5]))
                 trichormus_values.append(float(x[5]))
-            elif('Eukaryota' in tr2king[x[0]]):
-                eukaryota_values.append(float(x[5])) 
-            elif('Bacteria' in tr2king[x[0]]):
+            elif ('Eukaryota' in tr2king[x[0]]):
+                eukaryota_values.append(float(x[5]))
+            elif ('Bacteria' in tr2king[x[0]]):
                 bacteria_values.append(float(x[5]))
 
-    testlist : list = []
+    testlist: list = []
     for i in range(0, len(trichormus_values)):
-        if(trichormus_values[i] < 25):
+        if (trichormus_values[i] < 25):
             testlist.append(trichormus_values[i])
-    #trichormus_values.remove(max(trichormus_values))
+    # trichormus_values.remove(max(trichormus_values))
     nostoc_azolla_weighted, nostoc_azolla_steps = RLperID(nostoc_azolla_values)
-    trichormus_weighted, trichormus_steps = RLperID(trichormus_values)
+    trichormus_weighted, trichormus_steps = RLperID(testlist)
     bacteria_weighted, bacteria_steps = RLperID(bacteria_values)
     eukaryota_weighted, eukaryota_steps = RLperID(eukaryota_values)
     print("----Nostoc Azolla-----")
@@ -92,19 +89,22 @@ def main():
     print(eukaryota_steps)
     print("-------------------------")
 
-
     plt.figure(figsize=(10, 6))
-    #Plotting the original counts in blu
-    plt.bar(eukaryota_steps, eukaryota_weighted, color='skyblue', label='TPM', width = 2000.0)
+    # Plotting the original counts in blue
+    plt.bar(trichormus_steps,
+            trichormus_weighted,
+            color='skyblue',
+            label='TPM',
+            width=2.0)
 
-    plt.xlabel('TPM')
-    plt.ylabel('Reads')
-    plt.title('TPM for Different Organisms')
+    plt.xlabel('Reads')
+    plt.ylabel('Transkripte')
+    plt.title('TPM für Trichormus')
     plt.xticks(rotation=45)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.legend()  # Adding a legend to distinguish between the two sets of bars
 
-    #Show the plot
+    # Show the plot
     plt.show()
 
 if __name__ == "__main__":
